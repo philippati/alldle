@@ -18,26 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Renders the keyboard with color feedback
   function renderKeyboard() {
-    // Collect letter statuses from guesses
-    const letterStatus = {};
-    for (let r = 0; r <= currentRow; r++) {
-      for (let c = 0; c < 9; c++) {
-        const letter = guesses[r][c];
-        if (!letter) continue;
-        if (ANSWER[c] === letter) {
-          letterStatus[letter] = 'correct';
-        } else if (ANSWER.includes(letter)) {
-          // Only upgrade to present if not already correct
-          if (letterStatus[letter] !== 'correct') {
-            letterStatus[letter] = 'present';
-          }
-        } else {
-          if (!letterStatus[letter]) {
-            letterStatus[letter] = 'absent';
-          }
-        }
-      }
-    }
+    
   }
 
   function renderBoard() {
@@ -52,7 +33,12 @@ document.addEventListener('DOMContentLoaded', function() {
       for (let c = 0; c < 9; c++) {
         const cell = document.createElement('div');
         cell.className = 'cell';
-        const letter = guesses[r][c];
+        letter = '';
+        if(r < currentRow) {
+          letter = guesses[r][c];
+        } else if (r === currentRow) {
+          letter = current_guess[c];
+        }
         cell.textContent = letter;
         if (letter && r < currentRow) {
           if (ANSWER[c] === letter) {
@@ -85,7 +71,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   kb.addEventListener('click', function(e) {
-    console.log(e);
     const key = e.target.textContent.toLowerCase();
     if (e.target.dataset.action === 'enter') {
       form.requestSubmit();
@@ -101,7 +86,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
     renderBoard();
-    console.log(current_guess);
   });
 
   form.addEventListener('submit', function(e) {
@@ -121,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
       message.textContent = "Congratulations! You guessed it!";
       finished = true;
       input.disabled = true;
-    } else if (currentRow === 5) {
+    } else if (currentRow === 6) {
       message.textContent = `Game over! The word was "${ANSWER.toUpperCase()}".`;
       finished = true;
       input.disabled = true;
