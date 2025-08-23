@@ -85,27 +85,23 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   kb.addEventListener('click', function(e) {
-    if (!e.target.classList.contains('kb-key') || input.disabled) return;
-    const key = e.target;
-    if (key.dataset.action === 'enter') {
+    console.log(e);
+    const key = e.target.textContent.toLowerCase();
+    if (e.target.dataset.action === 'enter') {
       form.requestSubmit();
-    } else if (key.dataset.action === 'backspace') {
-      input.value = input.value.slice(0, -1);
+    } else if (e.target.dataset.action === 'backspace') {
+      if (current_guess.length === 1) {
+        current_guess = '';
+      } else {
+        current_guess = current_guess.slice(0, -1);
+      }
     } else {
-      if (input.value.length < 9) {
-        input.value += key.textContent.toLowerCase();
+      if (current_guess.length < 9) {
+        current_guess += key;
       }
     }
-    input.focus();
-
-    // Update keyboard keys
-    document.querySelectorAll('.kb-key').forEach(btn => {
-      const l = btn.textContent.toLowerCase();
-      btn.classList.remove('correct', 'present', 'absent');
-      if (letterStatus[l]) {
-        btn.classList.add(letterStatus[l]);
-      }
-    });
+    renderBoard();
+    console.log(current_guess);
   });
 
   form.addEventListener('submit', function(e) {
