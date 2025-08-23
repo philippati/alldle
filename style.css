@@ -20,7 +20,7 @@ body { font-family: Arial, sans-serif; background: #121213; color: #fff; text-al
 input[type="text"] { width: 300px; font-size: 1.2em; padding: 10px; margin-top: 20px; }
 button { padding: 10px 20px; font-size: 1em; margin-left: 10px; }
 #message { margin-top: 20px; font-size: 1.2em; }
-#keyboard { user-select: none; }
+#keyboard { user-select: none; margin: 30px auto 0; width: 90%;}
 .kb-row { display: flex; justify-content: center; margin-bottom: 5px; }
 .kb-key {
   background: #818384;
@@ -30,13 +30,15 @@ button { padding: 10px 20px; font-size: 1em; margin-left: 10px; }
   border-radius: 4px;
   display: flex;
   align-items: center;
+  aspect-ratio: 1.5;
   justify-content: center;
   font-size: 1em;
-  width: 32px;
-  height: 48px;
+  width: 10%;
+  height: auto;
   cursor: pointer;
   justify-content: center;
   transition: background 0.2s;
+  max-width: 100px;
 }
-.kb-key[data-action] { width: 52px; font-size: 0.95em; }
+.kb-key[data-action] { width: 20%; font-size: 0.95em; }
 .kb-key:active { background: #565758; }
