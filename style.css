@@ -114,61 +114,78 @@ h1 {
 
 #keyboard {
   flex-shrink: 0;
-  margin: 4px 2px;
-  width: 90%;
-  max-width: min(500px, 100%);
-  max-height: min(180px, 28vh);
-  display: grid;
-  grid-template-rows: repeat(3, 1fr);
-  padding: 0 2px;
+  margin: 8px 0;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 0 8px;
 }
 
 .kb-row {
+  display: flex;
   justify-content: center;
-  margin-bottom: 5px;
+  align-items: center;
+  gap: 6px;
   width: 100%;
-  gap: 5px;
-}
-
-.row-0 {
-  display: grid;
-  grid-template-columns: repeat(10, 8%);
-}
-
-.row-1 {
-  display: grid;
-  grid-template-columns: repeat(9, 8%);
-}
-
-.row-2 {
-  display: grid;
-  grid-template-columns: repeat(9, 8%);
 }
 
 .kb-key {
+  flex: 1;
+  min-width: 0;
+  max-width: 43px;
+  height: 51px;
   background: #818384;
   color: #fff;
   border: none;
   border-radius: 4px;
   display: flex;
   align-items: center;
-  aspect-ratio: 0.7;
   justify-content: center;
-  font-size: 1em;
-  width: 100%;
-  height: auto;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-family: inherit;
   cursor: pointer;
-  transition: background 0.2s;
-  padding: 0px;
-  margin: 0px;
+  transition: background 0.15s;
+  padding: 0;
+  margin: 0;
 }
 
-.kb-key[data-action] { width: 100%; font-size: 0.95em; }
+.kb-key[data-action="enter"],
+.kb-key[data-action="backspace"] {
+  flex: 1.5;
+  max-width: 65px;
+  font-size: 0.75rem;
+}
+
 .kb-key:active { background: #565758; }
 
 .kb-key.correct { background: #538d4e; color: #fff; }
 .kb-key.present { background: #b59f3b; color: #fff; }
 .kb-key.absent { background: #3a3a3c; color: #fff; }
+
+/* Mobile / narrow: keyboard scales to fit like Wordle */
+@media (max-width: 500px), (max-height: 700px) {
+  #keyboard {
+    margin: 6px 0;
+    gap: 4px;
+    padding: 0 4px;
+  }
+  .kb-row { gap: 4px; }
+  .kb-key {
+    height: 46px;
+    max-width: none;
+    font-size: 0.75rem;
+  }
+  .kb-key[data-action="enter"],
+  .kb-key[data-action="backspace"] {
+    flex: 1.5;
+    max-width: none;
+    font-size: 0.65rem;
+  }
+}
 
 /* Short viewport (phone portrait): reserve less for chrome so board fits */
 @media (max-height: 600px) {
@@ -181,6 +198,17 @@ h1 {
     height: 2.25em;
     min-height: 2.25em;
   }
-  #keyboard { max-height: min(160px, 26vh); }
-  .kb-key { font-size: 0.85em; min-height: 36px; }
+  #keyboard {
+    margin: 4px 0;
+    gap: 3px;
+  }
+  .kb-row { gap: 3px; }
+  .kb-key {
+    height: 40px;
+    font-size: 0.7rem;
+  }
+  .kb-key[data-action="enter"],
+  .kb-key[data-action="backspace"] {
+    font-size: 0.6rem;
+  }
 }
