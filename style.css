@@ -166,24 +166,24 @@ h1 {
 .kb-key.present { background: #b59f3b; color: #fff; }
 .kb-key.absent { background: #3a3a3c; color: #fff; }
 
-/* Mobile / narrow: keyboard scales to fit like Wordle */
+/* Mobile / narrow: keyboard scales to fit like Wordle, larger for touch */
 @media (max-width: 500px), (max-height: 700px) {
   #keyboard {
-    margin: 6px 0;
-    gap: 4px;
+    margin: 8px 0;
+    gap: 6px;
     padding: 0 4px;
   }
-  .kb-row { gap: 4px; }
+  .kb-row { gap: 6px; }
   .kb-key {
-    height: 46px;
+    height: 56px;
     max-width: none;
-    font-size: 0.75rem;
+    font-size: 0.9rem;
   }
   .kb-key[data-action="enter"],
   .kb-key[data-action="backspace"] {
     flex: 1.5;
     max-width: none;
-    font-size: 0.65rem;
+    font-size: 0.75rem;
   }
 }
 
@@ -199,16 +199,16 @@ h1 {
     min-height: 2.25em;
   }
   #keyboard {
-    margin: 4px 0;
-    gap: 3px;
+    margin: 6px 0;
+    gap: 5px;
   }
-  .kb-row { gap: 3px; }
+  .kb-row { gap: 5px; }
   .kb-key {
-    height: 40px;
-    font-size: 0.7rem;
+    height: 48px;
+    font-size: 0.85rem;
   }
   .kb-key[data-action="enter"],
   .kb-key[data-action="backspace"] {
-    font-size: 0.6rem;
+    font-size: 0.7rem;
   }
 }
